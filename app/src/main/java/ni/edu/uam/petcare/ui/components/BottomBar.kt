@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import ni.edu.uam.petcare.navigation.Routes
+import androidx.compose.material.icons.filled.List
 
 @Composable
 fun BottomBar(navController: NavController) {
@@ -39,6 +40,19 @@ fun BottomBar(navController: NavController) {
             },
             label = {
                 Text("Mascotas")
+            }
+        )
+
+        NavigationBarItem(
+            selected = false,
+            onClick = {
+                navController.navigate(Routes.Services.route)
+            },
+            icon = {
+                Icon(Icons.Default.List, contentDescription = "Servicios")
+            },
+            label = {
+                Text("Servicios")
             }
         )
     }

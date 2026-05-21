@@ -9,6 +9,7 @@ import ni.edu.uam.petcare.ui.screens.EditPetScreen
 import ni.edu.uam.petcare.ui.screens.HomeScreen
 import ni.edu.uam.petcare.ui.screens.PetDetailScreen
 import ni.edu.uam.petcare.ui.screens.PetsScreen
+import ni.edu.uam.petcare.ui.screens.ServiceHistoryScreen
 import ni.edu.uam.petcare.ui.screens.SplashScreen
 
 @Composable
@@ -30,19 +31,41 @@ fun NavGraph() {
         }
 
         composable(Routes.Pets.route) {
-            PetsScreen()
+            PetsScreen(navController)
         }
 
         composable(Routes.AddPet.route) {
             AddPetScreen(navController)
         }
 
-        composable(Routes.EditPet.route) {
-            EditPetScreen(navController)
+        composable(Routes.Details.route) { backStackEntry ->
+
+            val petId =
+                backStackEntry.arguments
+                    ?.getString("petId")
+                    ?.toIntOrNull() ?: 0
+
+            PetDetailScreen(
+                navController = navController,
+                petId = petId
+            )
         }
 
-        composable(Routes.Details.route) {
-            PetDetailScreen(navController)
+        composable("edit_pet/{petId}") { backStackEntry ->
+
+            val petId =
+                backStackEntry.arguments
+                    ?.getString("petId")
+                    ?.toIntOrNull() ?: 0
+
+            EditPetScreen(
+                navController = navController,
+                petId = petId
+            )
+        }
+
+        composable(Routes.Services.route) {
+            ServiceHistoryScreen()
         }
     }
 }

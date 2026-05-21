@@ -118,7 +118,7 @@ El sistema incluye programación de citas con:
 git clone <URL_DEL_REPOSITORIO>
 
 # Entrar al proyecto
-cd petcare
+cd <NOMBRE_DEL_REPOSITORIO>
 ```
 
 1. Abrir el proyecto en **Android Studio**.

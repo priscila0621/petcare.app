@@ -15,24 +15,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import ni.edu.uam.petcare.model.Pet
 import ni.edu.uam.petcare.navigation.Routes
+import ni.edu.uam.petcare.viewmodel.PetViewModel
 
 @Composable
-fun PetsScreen(navController: NavController) {
+fun PetsScreen(
+    navController: NavController,
+    petViewModel: PetViewModel = viewModel()
+) {
 
-    var pets by remember {
-        mutableStateOf(
-            listOf(
-                Pet(1, "Max", "Perro", "Labrador", 3),
-                Pet(2, "Milo", "Gato", "Persa", 2)
-            )
-        )
-    }
+    val pets = petViewModel.pets
 
     Scaffold(
         topBar = {
@@ -42,6 +39,7 @@ fun PetsScreen(navController: NavController) {
                 }
             )
         },
+
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -51,6 +49,7 @@ fun PetsScreen(navController: NavController) {
                 Text("+")
             }
         }
+
     ) { padding ->
 
         LazyColumn(
@@ -58,6 +57,7 @@ fun PetsScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp),
+
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
@@ -69,6 +69,7 @@ fun PetsScreen(navController: NavController) {
                         .clickable {
                             navController.navigate("details/${pet.id}")
                         },
+
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
 
@@ -83,6 +84,7 @@ fun PetsScreen(navController: NavController) {
 
                         Text(text = pet.type)
                         Text(text = pet.breed)
+                        Text(text = "${pet.age} años")
                     }
                 }
             }

@@ -6,4 +6,7 @@ sealed class Routes(val route: String) {
     object Pets : Routes("pets")
     object AddPet : Routes("add_pet")
     object Details : Routes("details")
+    object EditPet : Routes("edit_pet")
+
+
 }
